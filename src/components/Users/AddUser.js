@@ -3,6 +3,7 @@ import classes from "./AddUser.module.css";
 import Button from "../UI/Button";
 import {useState} from "react";
 import ErrorModal from "../UI/ErrorModal";
+import Wrapper from "../Helpers/Wrapper";
 
 const AddUser = (props) => {
     //maintain states for username and age
@@ -54,7 +55,7 @@ const AddUser = (props) => {
 
     //Card is composition
     return (
-        <div>
+        <Wrapper>
             {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
             <Card className={classes.input}>
                 <form onSubmit={addUserHandler}>
@@ -65,7 +66,7 @@ const AddUser = (props) => {
                     <Button type="submit">Add User</Button>
                 </form>
             </Card>
-        </div>
+        </Wrapper>
     );
 };
 
