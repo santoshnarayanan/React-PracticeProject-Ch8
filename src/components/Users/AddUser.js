@@ -16,7 +16,7 @@ const AddUser = (props) => {
         //conversion of string to number (javascript)
         if(+enteredAge < 1){ return;}
 
-        console.log(enteredUserName, enteredAge);
+        props.onAddUser(enteredUserName,enteredAge); //lifting State to App.Js on click on every Button
 
         //Reset state to empty string after clicking on button
         setEnteredUserName('');
