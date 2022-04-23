@@ -8,16 +8,26 @@ const AddUser = (props) => {
     //maintain states for username and age
     const [enteredUserName, setEnteredUserName] = useState('');
     const [enteredAge, setEnteredAge] = useState('');
+    //maintain state for error
+    const [error, setError] = useState();
 
     const addUserHandler = (event) => {
         event.preventDefault(); // prevent postback
 
         //Validation if blank or age entered is less than 1
         if (enteredUserName.trim().length === 0 || enteredAge.trim().length === 0) {
+            setError({
+                title:'Invalid input',
+                message:'Enter valid name and age'
+            });
             return;
         }
         //conversion of string to number (javascript)
         if (+enteredAge < 1) {
+            setError({
+                title:'Invalid age',
+                message:'Enter valid age and should be greater than zero'
+            });
             return;
         }
 
@@ -38,10 +48,14 @@ const AddUser = (props) => {
         setEnteredAge(event.target.value);
     };
 
+    const errorHandler = () =>{
+        setError(null);
+    };
+
     //Card is composition
     return (
         <div>
-            <ErrorModal title="An error occurred!" message="Something went wrong"/>
+            {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
             <Card className={classes.input}>
                 <form onSubmit={addUserHandler}>
                     <label htmlFor="username">Username</label>
